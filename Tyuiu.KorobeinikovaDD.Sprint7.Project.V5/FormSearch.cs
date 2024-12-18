@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Tyuiu.KorobeinikovaDD.Sprint7.Project.V5.Lib.Sort;
 namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
 {
     public partial class FormSearch : Form
@@ -22,13 +23,13 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
 
         private void InitializeDataGridView()
         {
-            dataGridView2.AutoGenerateColumns = true; // Автоматическая генерация колонок
+            dataGridView2.AutoGenerateColumns = true;
         }
 
         public void SetData(DataTable data)
         {
-            dataTable = data; // Сохраняем данные
-            dataGridView2.DataSource = data; // Устанавливаем данные в DataGridView
+            dataTable = data;
+            dataGridView2.DataSource = data;
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
@@ -43,8 +44,66 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                 dataGridView2.DataSource = filteredRows.CopyToDataTable();
             }
         }
+        private DataServiceSort dataServiceSort = new DataServiceSort();
+        private void buttonSortAscendingE_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable sortedTable = dataServiceSort.SortColumnAscending(dataTable, "Количество штук на складе");
+                dataGridView2.DataSource = sortedTable; 
+                dataGridView2.Refresh(); 
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-    }
-}
+        private void buttonSortDescendingE_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable sortedTable = dataServiceSort.SortColumnDescending(dataTable, "Количество штук на складе");
+                dataGridView2.DataSource = sortedTable;
+                dataGridView2.Refresh();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void buttonSortAscendingPrice_Click(object sender, EventArgs e)
+        
+            {
+                try
+                {
+                    DataTable sortedTable = dataServiceSort.SortColumnAscending(dataTable, "Цена за единицу");
+                    dataGridView2.DataSource = sortedTable; 
+                    dataGridView2.Refresh(); 
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            private void buttonSortDescendingPrice_Click(object sender, EventArgs e)
+            {
+                try
+                {
+                    DataTable sortedTable = dataServiceSort.SortColumnDescending(dataTable, "Цена за единицу");
+                    dataGridView2.DataSource = sortedTable;
+                    dataGridView2.Refresh();
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+
+        }
+    } 
+    
 
   

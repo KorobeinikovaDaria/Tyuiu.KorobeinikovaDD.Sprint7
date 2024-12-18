@@ -190,7 +190,10 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
             filterForm.Show();
         }
 
-        
+        private void txtProductCode_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
   
