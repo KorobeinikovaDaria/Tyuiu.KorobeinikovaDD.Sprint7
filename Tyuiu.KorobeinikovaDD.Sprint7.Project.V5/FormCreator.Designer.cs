@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Label label2;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCreator));
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            buttonOpen = new Button();
+            buttonCreate = new Button();
+            buttonSave = new Button();
             button4 = new Button();
             dataGridView1 = new DataGridView();
             groupBox1 = new GroupBox();
@@ -40,10 +41,10 @@
             groupBox2 = new GroupBox();
             panel5 = new Panel();
             label5 = new Label();
-            txtPrice = new TextBox();
+            txtDescription = new TextBox();
             panel4 = new Panel();
             label4 = new Label();
-            txtDescription = new TextBox();
+            txtPrice = new TextBox();
             panel3 = new Panel();
             label3 = new Label();
             txtQuantity = new TextBox();
@@ -52,12 +53,13 @@
             panel1 = new Panel();
             label1 = new Label();
             openFileDialog1 = new OpenFileDialog();
-            button5 = new Button();
+            buttonAdd = new Button();
             saveFileDialog1 = new SaveFileDialog();
-            button6 = new Button();
-            button7 = new Button();
-            button8 = new Button();
-            button9 = new Button();
+            buttonSearch = new Button();
+            buttonStatistics = new Button();
+            buttonHelp = new Button();
+            buttonInfo = new Button();
+            toolTipInfo = new ToolTip(components);
             label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
@@ -74,40 +76,44 @@
             label2.AutoSize = true;
             label2.Location = new Point(0, 0);
             label2.Name = "label2";
-            label2.Size = new Size(187, 20);
+            label2.Size = new Size(190, 20);
             label2.TabIndex = 12;
-            label2.Text = "Введите название товара";
+            label2.Text = "Введите название товара:";
             // 
-            // button1
+            // buttonOpen
             // 
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(81, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 58);
-            button1.TabIndex = 0;
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += btnLoadFile_Click;
+            buttonOpen.Image = (Image)resources.GetObject("buttonOpen.Image");
+            buttonOpen.Location = new Point(81, 12);
+            buttonOpen.Name = "buttonOpen";
+            buttonOpen.Size = new Size(94, 58);
+            buttonOpen.TabIndex = 0;
+            toolTipInfo.SetToolTip(buttonOpen, "Открыть файл в формате csv");
+            buttonOpen.UseVisualStyleBackColor = true;
+            buttonOpen.Click += btnLoadFile_Click;
             // 
-            // button2
+            // buttonCreate
             // 
-            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(815, 12);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 58);
-            button2.TabIndex = 1;
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += btnEdit_Click;
+            buttonCreate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonCreate.Image = (Image)resources.GetObject("buttonCreate.Image");
+            buttonCreate.Location = new Point(815, 12);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(94, 58);
+            buttonCreate.TabIndex = 1;
+            toolTipInfo.SetToolTip(buttonCreate, "Редактировать данные (заменить строку)");
+            buttonCreate.UseVisualStyleBackColor = true;
+            buttonCreate.Click += buttonEdit_Click;
             // 
-            // button3
+            // buttonSave
             // 
-            button3.Image = (Image)resources.GetObject("button3.Image");
-            button3.Location = new Point(181, 12);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 58);
-            button3.TabIndex = 2;
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += buttonSaveFile_Click;
+            buttonSave.Enabled = false;
+            buttonSave.Image = (Image)resources.GetObject("buttonSave.Image");
+            buttonSave.Location = new Point(181, 12);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(94, 58);
+            buttonSave.TabIndex = 2;
+            toolTipInfo.SetToolTip(buttonSave, "Сохранить файл в формате csv");
+            buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += buttonSaveFile_Click;
             // 
             // button4
             // 
@@ -117,6 +123,7 @@
             button4.Name = "button4";
             button4.Size = new Size(94, 58);
             button4.TabIndex = 3;
+            toolTipInfo.SetToolTip(button4, "Удалить данные (удалить строку)");
             button4.UseVisualStyleBackColor = true;
             button4.Click += btnDelete_Click;
             // 
@@ -145,7 +152,7 @@
             // 
             txtProductCode.Location = new Point(3, 26);
             txtProductCode.Name = "txtProductCode";
-            txtProductCode.Size = new Size(151, 27);
+            txtProductCode.Size = new Size(242, 27);
             txtProductCode.TabIndex = 6;
             txtProductCode.TextChanged += txtProductCode_TextChanged;
             // 
@@ -167,7 +174,7 @@
             // panel5
             // 
             panel5.Controls.Add(label5);
-            panel5.Controls.Add(txtPrice);
+            panel5.Controls.Add(txtDescription);
             panel5.Location = new Point(16, 265);
             panel5.Name = "panel5";
             panel5.Size = new Size(278, 51);
@@ -178,21 +185,21 @@
             label5.AutoSize = true;
             label5.Location = new Point(3, 1);
             label5.Name = "label5";
-            label5.Size = new Size(189, 20);
+            label5.Size = new Size(192, 20);
             label5.TabIndex = 12;
-            label5.Text = "Введите описание товара";
+            label5.Text = "Введите описание товара:";
             // 
-            // txtPrice
+            // txtDescription
             // 
-            txtPrice.Location = new Point(3, 21);
-            txtPrice.Name = "txtPrice";
-            txtPrice.Size = new Size(151, 27);
-            txtPrice.TabIndex = 9;
+            txtDescription.Location = new Point(3, 24);
+            txtDescription.Name = "txtDescription";
+            txtDescription.Size = new Size(242, 27);
+            txtDescription.TabIndex = 10;
             // 
             // panel4
             // 
             panel4.Controls.Add(label4);
-            panel4.Controls.Add(txtDescription);
+            panel4.Controls.Add(txtPrice);
             panel4.Location = new Point(16, 206);
             panel4.Name = "panel4";
             panel4.Size = new Size(278, 53);
@@ -205,16 +212,16 @@
             label4.CausesValidation = false;
             label4.Location = new Point(0, 0);
             label4.Name = "label4";
-            label4.Size = new Size(184, 20);
+            label4.Size = new Size(187, 20);
             label4.TabIndex = 11;
-            label4.Text = "Введите цену за единицу";
+            label4.Text = "Введите цену за единицу:";
             // 
-            // txtDescription
+            // txtPrice
             // 
-            txtDescription.Location = new Point(3, 23);
-            txtDescription.Name = "txtDescription";
-            txtDescription.Size = new Size(151, 27);
-            txtDescription.TabIndex = 10;
+            txtPrice.Location = new Point(0, 23);
+            txtPrice.Name = "txtPrice";
+            txtPrice.Size = new Size(245, 27);
+            txtPrice.TabIndex = 9;
             // 
             // panel3
             // 
@@ -230,15 +237,15 @@
             label3.AutoSize = true;
             label3.Location = new Point(0, 1);
             label3.Name = "label3";
-            label3.Size = new Size(255, 20);
+            label3.Size = new Size(258, 20);
             label3.TabIndex = 13;
-            label3.Text = "Введите количество штук на складе";
+            label3.Text = "Введите количество штук на складе:";
             // 
             // txtQuantity
             // 
             txtQuantity.Location = new Point(3, 24);
             txtQuantity.Name = "txtQuantity";
-            txtQuantity.Size = new Size(151, 27);
+            txtQuantity.Size = new Size(242, 27);
             txtQuantity.TabIndex = 8;
             // 
             // panel2
@@ -254,7 +261,7 @@
             // 
             txtProductName.Location = new Point(3, 23);
             txtProductName.Name = "txtProductName";
-            txtProductName.Size = new Size(151, 27);
+            txtProductName.Size = new Size(242, 27);
             txtProductName.TabIndex = 7;
             // 
             // panel1
@@ -271,84 +278,99 @@
             label1.AutoSize = true;
             label1.Location = new Point(3, 3);
             label1.Name = "label1";
-            label1.Size = new Size(145, 20);
+            label1.Size = new Size(148, 20);
             label1.TabIndex = 7;
-            label1.Text = "Введите код товара";
+            label1.Text = "Введите код товара:";
+            label1.Click += label1_Click;
             // 
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button5
+            // buttonAdd
             // 
-            button5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button5.Image = (Image)resources.GetObject("button5.Image");
-            button5.Location = new Point(715, 12);
-            button5.Name = "button5";
-            button5.Size = new Size(94, 58);
-            button5.TabIndex = 8;
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += btnAdd_Click;
+            buttonAdd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonAdd.Image = (Image)resources.GetObject("buttonAdd.Image");
+            buttonAdd.Location = new Point(715, 12);
+            buttonAdd.Name = "buttonAdd";
+            buttonAdd.Size = new Size(94, 58);
+            buttonAdd.TabIndex = 8;
+            toolTipInfo.SetToolTip(buttonAdd, "Добавить данные (добавить строку)");
+            buttonAdd.UseVisualStyleBackColor = true;
+            buttonAdd.Click += btnAdd_Click;
             // 
-            // button6
+            // buttonSearch
             // 
-            button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button6.Image = (Image)resources.GetObject("button6.Image");
-            button6.Location = new Point(915, 422);
-            button6.Name = "button6";
-            button6.Size = new Size(94, 58);
-            button6.TabIndex = 9;
-            button6.UseVisualStyleBackColor = true;
-            button6.Click += buttonOpenSearchForm_Click;
+            buttonSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonSearch.Enabled = false;
+            buttonSearch.Image = (Image)resources.GetObject("buttonSearch.Image");
+            buttonSearch.Location = new Point(915, 422);
+            buttonSearch.Name = "buttonSearch";
+            buttonSearch.Size = new Size(94, 58);
+            buttonSearch.TabIndex = 9;
+            toolTipInfo.SetToolTip(buttonSearch, "Открыть окно поиска");
+            buttonSearch.UseVisualStyleBackColor = true;
+            buttonSearch.Click += buttonOpenSearchForm_Click;
             // 
-            // button7
+            // buttonStatistics
             // 
-            button7.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button7.Image = (Image)resources.GetObject("button7.Image");
-            button7.Location = new Point(815, 422);
-            button7.Name = "button7";
-            button7.Size = new Size(94, 58);
-            button7.TabIndex = 10;
-            button7.UseVisualStyleBackColor = true;
+            buttonStatistics.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonStatistics.Enabled = false;
+            buttonStatistics.Image = (Image)resources.GetObject("buttonStatistics.Image");
+            buttonStatistics.Location = new Point(815, 422);
+            buttonStatistics.Name = "buttonStatistics";
+            buttonStatistics.Size = new Size(94, 58);
+            buttonStatistics.TabIndex = 10;
+            toolTipInfo.SetToolTip(buttonStatistics, "Открыть окно графика");
+            buttonStatistics.UseVisualStyleBackColor = true;
+            buttonStatistics.Click += buttonOpenStatisticsForm_Click;
             // 
-            // button8
+            // buttonHelp
             // 
-            button8.Image = (Image)resources.GetObject("button8.Image");
-            button8.Location = new Point(12, 12);
-            button8.Name = "button8";
-            button8.Size = new Size(63, 58);
-            button8.TabIndex = 11;
-            button8.UseVisualStyleBackColor = true;
+            buttonHelp.Image = (Image)resources.GetObject("buttonHelp.Image");
+            buttonHelp.Location = new Point(12, 12);
+            buttonHelp.Name = "buttonHelp";
+            buttonHelp.Size = new Size(63, 58);
+            buttonHelp.TabIndex = 11;
+            toolTipInfo.SetToolTip(buttonHelp, "Руководство пользователя");
+            buttonHelp.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // buttonInfo
             // 
-            button9.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button9.Image = (Image)resources.GetObject("button9.Image");
-            button9.Location = new Point(615, 422);
-            button9.Name = "button9";
-            button9.Size = new Size(63, 58);
-            button9.TabIndex = 12;
-            button9.UseVisualStyleBackColor = true;
+            buttonInfo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonInfo.Image = (Image)resources.GetObject("buttonInfo.Image");
+            buttonInfo.Location = new Point(615, 422);
+            buttonInfo.Name = "buttonInfo";
+            buttonInfo.Size = new Size(63, 58);
+            buttonInfo.TabIndex = 12;
+            toolTipInfo.SetToolTip(buttonInfo, "Информация о программе");
+            buttonInfo.UseVisualStyleBackColor = true;
+            // 
+            // toolTipInfo
+            // 
+            toolTipInfo.ToolTipIcon = ToolTipIcon.Info;
+            toolTipInfo.ToolTipTitle = "Подсказка";
+            toolTipInfo.Popup += toolTipInfo_Popup;
             // 
             // FormCreator
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1021, 495);
-            Controls.Add(button9);
-            Controls.Add(button8);
-            Controls.Add(button7);
-            Controls.Add(button6);
-            Controls.Add(button5);
+            Controls.Add(buttonInfo);
+            Controls.Add(buttonHelp);
+            Controls.Add(buttonStatistics);
+            Controls.Add(buttonSearch);
+            Controls.Add(buttonAdd);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(button4);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(buttonSave);
+            Controls.Add(buttonCreate);
+            Controls.Add(buttonOpen);
             MinimumSize = new Size(1039, 542);
             Name = "FormCreator";
-            Text = "Главное меню";
+            Text = "Оптовая база";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
@@ -367,9 +389,9 @@
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private Button buttonOpen;
+        private Button buttonCreate;
+        private Button buttonSave;
         private Button button4;
         private DataGridView dataGridView1;
         private GroupBox groupBox1;
@@ -380,12 +402,12 @@
         private TextBox txtQuantity;
         private TextBox txtDescription;
         private TextBox txtPrice;
-        private Button button5;
+        private Button buttonAdd;
         private SaveFileDialog saveFileDialog1;
-        private Button button6;
-        private Button button7;
-        private Button button8;
-        private Button button9;
+        private Button buttonSearch;
+        private Button buttonStatistics;
+        private Button buttonHelp;
+        private Button buttonInfo;
         private Panel panel1;
         private Panel panel3;
         private Label label3;
@@ -395,5 +417,6 @@
         private Label label5;
         private Panel panel4;
         private Label label4;
+        private ToolTip toolTipInfo;
     }
 }

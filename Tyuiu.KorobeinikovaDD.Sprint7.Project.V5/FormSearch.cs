@@ -37,13 +37,27 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
             string searchValue = textBoxSearch.Text.Trim();
             if (!string.IsNullOrEmpty(searchValue) && dataTable != null)
             {
+                // Фильтруем строки по критериям поиска
                 var filteredRows = dataTable.AsEnumerable()
-                    .Where(row => row.Field<string>("Код товара").Contains(searchValue) ||
-                                  row.Field<string>("Название").Contains(searchValue));
+                    .Where(row => row.Field<string>("Код товара").IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                                  row.Field<string>("Название").IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0);
 
-                dataGridView2.DataSource = filteredRows.CopyToDataTable();
+                // Проверяем, есть ли отфильтрованные строки перед копированием в DataTable
+                if (filteredRows.Any())
+                {
+                    // Копируем отфильтрованные строки в новый DataTable
+                    DataTable resultTable = filteredRows.CopyToDataTable();
+                    dataGridView2.DataSource = resultTable; // Устанавливаем результат в DataGridView
+                }
+                else
+                {
+                    // Если нет результатов, очищаем DataGridView или показываем сообщение
+                    dataGridView2.DataSource = null; // или dataGridView2.Rows.Clear();
+                    MessageBox.Show("Нет результатов для поиска.");
+                }
             }
         }
+
         private DataServiceSort dataServiceSort = new DataServiceSort();
         private void buttonSortAscendingE_Click(object sender, EventArgs e)
         {

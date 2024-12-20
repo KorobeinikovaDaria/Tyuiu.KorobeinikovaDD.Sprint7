@@ -1,4 +1,6 @@
 using System.Data;
+using System.Diagnostics;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
@@ -25,43 +27,76 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                     LoadDataFromFile(openFileDialog.FileName);
                 }
             }
+            buttonStatistics.Enabled = true;
+            buttonSearch.Enabled = true;
         }
 
         private void LoadDataFromFile(string filePath)
         {
             try
             {
-                var lines = File.ReadAllLines(filePath);
-                var dataTable = new DataTable();
-
-                // Добавляем столбцы в DataTable
-                dataTable.Columns.Add("Код товара");
-                dataTable.Columns.Add("Название");
-                dataTable.Columns.Add("Количество штук на складе");
-                dataTable.Columns.Add("Цена за единицу");
-                dataTable.Columns.Add("Описание товара");
-
-                // Заполняем DataTable данными из файла
-                foreach (var line in lines.Skip(1)) // Пропускаем заголовок
+                // Инициализируем dataTable, если он еще не был инициализирован
+                if (dataTable == null)
                 {
-                    var values = line.Split(',');
+                    InitializeDataTable();
+                }
+                else
+                {
+                    dataTable.Clear(); // Очищаем существующие данные
+                }
 
-                    // Убедитесь, что количество значений соответствует количеству столбцов
+                var lines = File.ReadAllLines(filePath);
+
+                foreach (var line in lines.Skip(1))
+                {
+                    var values = ParseCsvLine(line);
+
                     if (values.Length == 5)
                     {
                         dataTable.Rows.Add(values);
                     }
                 }
 
-                // Устанавливаем источник данных для DataGridView
+                // Привязываем dataTable к DataGridView
                 dataGridView1.DataSource = dataTable;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}");
             }
-
         }
+
+        private string[] ParseCsvLine(string line)
+        {
+            var result = new List<string>();
+            var sb = new StringBuilder();
+            bool inQuotes = false;
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                char c = line[i];
+
+                if (c == '"')
+                {
+                    inQuotes = !inQuotes;
+                }
+                else if (c == ',' && !inQuotes)
+                {
+                    result.Add(sb.ToString().Trim());
+                    sb.Clear();
+                }
+                else
+                {
+                    sb.Append(c);
+                }
+            }
+
+            // Добавляем последнее значение
+            result.Add(sb.ToString().Trim());
+
+            return result.ToArray();
+        }
+
         private void InitializeDataTable()
         {
             dataTable = new DataTable();
@@ -74,64 +109,95 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            DataRow newRow = dataTable.NewRow();
-            newRow["Код товара"] = txtProductCode.Text;
-            newRow["Название"] = txtProductName.Text;
-            newRow["Количество штук на складе"] = txtQuantity.Text;
-            newRow["Цена за единицу"] = txtPrice.Text;
-            newRow["Описание товара"] = txtDescription.Text;
+            if (dataTable != null)
+            {
+                DataRow newRow = dataTable.NewRow();
+                newRow["Код товара"] = txtProductCode.Text;
+                newRow["Название"] = txtProductName.Text;
+                newRow["Количество штук на складе"] = txtQuantity.Text;
+                newRow["Цена за единицу"] = txtPrice.Text;
+                newRow["Описание товара"] = txtDescription.Text;
 
-            dataTable.Rows.Add(newRow);
-            ClearTextBoxes();
+                dataTable.Rows.Add(newRow);
+                ClearTextBoxes();
+            }
+            buttonStatistics.Enabled = true;
+            buttonSearch.Enabled = true;
+            buttonSave.Enabled = true;
         }
 
-
-
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void buttonEdit_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0 && dataTable != null)
             {
                 DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+
                 selectedRow.Cells["Код товара"].Value = txtProductCode.Text;
                 selectedRow.Cells["Название"].Value = txtProductName.Text;
                 selectedRow.Cells["Количество штук на складе"].Value = txtQuantity.Text;
                 selectedRow.Cells["Цена за единицу"].Value = txtPrice.Text;
                 selectedRow.Cells["Описание товара"].Value = txtDescription.Text;
+                // Также обновляем данные в dataTable
+                DataRow rowToUpdate = dataTable.Rows[selectedRow.Index];
+                rowToUpdate["Код товара"] = txtProductCode.Text;
+                rowToUpdate["Название"] = txtProductName.Text;
+                rowToUpdate["Количество штук на складе"] = txtQuantity.Text;
+                rowToUpdate["Цена за единицу"] = txtPrice.Text;
+                rowToUpdate["Описание товара"] = txtDescription.Text;
+
                 ClearTextBoxes();
             }
+            buttonSave.Enabled = true;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            try
             {
-                dataGridView1.Rows.RemoveAt(dataGridView1.SelectedRows[0].Index);
-                ClearTextBoxes();
+                if (dataGridView1.SelectedRows.Count > 0 && dataTable != null)
+                {
+                    int index = dataGridView1.SelectedRows[0].Index;
+
+                    dataTable.Rows.RemoveAt(index);
+                    dataGridView1.Rows.RemoveAt(index);
+
+                    ClearTextBoxes();
+                }
+                else
+                {
+                    MessageBox.Show("Пожалуйста, выберите строку для удаления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка при удалении строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                buttonSave.Enabled = true;
             }
         }
+
         private void buttonSaveFile_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.FileName = "OutPutDataFileTask7V7.csv";
+            saveFileDialog1.FileName = "Оптовая база.csv";
             saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
 
-            // Показываем диалоговое окно и проверяем результат
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string path = saveFileDialog1.FileName; // Используем правильное имя переменной
+                string path = saveFileDialog1.FileName;
 
                 FileInfo fileInfo = new FileInfo(path);
                 bool fileExists = fileInfo.Exists;
 
-                // Если файл существует, удаляем его
                 if (fileExists)
                 {
                     File.Delete(path);
                 }
 
-                // Записываем данные в файл
-                using (StreamWriter writer = new StreamWriter(path)) // Используем path вместо filePath
+                using (StreamWriter writer = new StreamWriter(path))
                 {
-                    // Записываем заголовки
+
                     for (int i = 0; i < dataTable.Columns.Count; i++)
                     {
                         writer.Write(dataTable.Columns[i]);
@@ -140,7 +206,7 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                     }
                     writer.WriteLine();
 
-                    // Записываем строки данных
+
                     foreach (DataRow row in dataTable.Rows)
                     {
                         for (int i = 0; i < dataTable.Columns.Count; i++)
@@ -153,7 +219,7 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                     }
                 }
 
-                MessageBox.Show($"CSV файл '{path}' успешно сохранен."); // Используем path для отображения сообщения
+                MessageBox.Show($"CSV файл '{path}' успешно сохранен.");
             }
         }
 
@@ -181,7 +247,6 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
         {
             FormSearch filterForm = new FormSearch();
 
-            // Передаем данные из DataTable во вторую форму
             if (dataTable != null)
             {
                 filterForm.SetData(dataTable.Copy());
@@ -190,10 +255,28 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
             filterForm.Show();
         }
 
+        private void buttonOpenStatisticsForm_Click(object sender, EventArgs e)
+        {
+            FormStatistics formStats = new FormStatistics();
+            formStats.SetData(dataTable);
+            formStats.Show();
+        }
         private void txtProductCode_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolTipInfo_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
+
+      
     }
 }
   
