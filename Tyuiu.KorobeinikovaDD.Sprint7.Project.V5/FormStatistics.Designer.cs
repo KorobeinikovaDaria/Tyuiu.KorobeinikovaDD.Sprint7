@@ -29,60 +29,61 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormStatistics));
-            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            button1 = new Button();
-            button2 = new Button();
+            chartQandP = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            buttonQ = new Button();
+            buttonPrice = new Button();
             textBoxMin = new TextBox();
             textBoxMax = new TextBox();
             label1 = new Label();
             label2 = new Label();
             toolTipInfo = new ToolTip(components);
-            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chartQandP).BeginInit();
             SuspendLayout();
             // 
-            // chart1
+            // chartQandP
             // 
-            chart1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            chartArea1.Name = "ChartArea1";
-            chart1.ChartAreas.Add(chartArea1);
-            chart1.Location = new Point(12, 81);
-            chart1.Name = "chart1";
-            series1.ChartArea = "ChartArea1";
-            series1.Name = "Series1";
-            chart1.Series.Add(series1);
-            chart1.Size = new Size(755, 367);
-            chart1.TabIndex = 0;
-            chart1.Text = "chart1";
-            toolTipInfo.SetToolTip(chart1, "Гистограмма, которая показывает количество штук на складе/цену за единицу товара\r\n");
+            chartQandP.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            chartArea2.Name = "ChartArea1";
+            chartQandP.ChartAreas.Add(chartArea2);
+            chartQandP.Location = new Point(12, 81);
+            chartQandP.Name = "chartQandP";
+            series2.ChartArea = "ChartArea1";
+            series2.Name = "Series1";
+            chartQandP.Series.Add(series2);
+            chartQandP.Size = new Size(755, 367);
+            chartQandP.TabIndex = 0;
+            chartQandP.Text = "chart1";
+            toolTipInfo.SetToolTip(chartQandP, "Гистограмма, которая показывает количество штук на складе/цену за единицу товара\r\n");
             // 
-            // button1
+            // buttonQ
             // 
-            button1.Image = Properties.Resources.package;
-            button1.Location = new Point(12, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 63);
-            button1.TabIndex = 1;
-            toolTipInfo.SetToolTip(button1, "Высчитать количество штук на складе");
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += buttonQuantity_Click;
+            buttonQ.Image = Properties.Resources.package;
+            buttonQ.Location = new Point(12, 12);
+            buttonQ.Name = "buttonQ";
+            buttonQ.Size = new Size(94, 63);
+            buttonQ.TabIndex = 1;
+            toolTipInfo.SetToolTip(buttonQ, "Высчитать количество штук на складе");
+            buttonQ.UseVisualStyleBackColor = true;
+            buttonQ.Click += buttonQuantity_Click;
             // 
-            // button2
+            // buttonPrice
             // 
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(112, 12);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 63);
-            button2.TabIndex = 2;
-            toolTipInfo.SetToolTip(button2, "Высчитать цену за единицу");
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += buttonPrice_Click;
+            buttonPrice.Image = (Image)resources.GetObject("buttonPrice.Image");
+            buttonPrice.Location = new Point(112, 12);
+            buttonPrice.Name = "buttonPrice";
+            buttonPrice.Size = new Size(94, 63);
+            buttonPrice.TabIndex = 2;
+            toolTipInfo.SetToolTip(buttonPrice, "Высчитать цену за единицу");
+            buttonPrice.UseVisualStyleBackColor = true;
+            buttonPrice.Click += buttonPrice_Click;
             // 
             // textBoxMin
             // 
             textBoxMin.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBoxMin.Enabled = false;
             textBoxMin.Location = new Point(642, 35);
             textBoxMin.Multiline = true;
             textBoxMin.Name = "textBoxMin";
@@ -93,6 +94,7 @@
             // textBoxMax
             // 
             textBoxMax.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBoxMax.Enabled = false;
             textBoxMax.Location = new Point(504, 35);
             textBoxMax.Multiline = true;
             textBoxMax.Name = "textBoxMax";
@@ -135,22 +137,22 @@
             Controls.Add(label1);
             Controls.Add(textBoxMax);
             Controls.Add(textBoxMin);
-            Controls.Add(button2);
-            Controls.Add(button1);
-            Controls.Add(chart1);
+            Controls.Add(buttonPrice);
+            Controls.Add(buttonQ);
+            Controls.Add(chartQandP);
             MinimumSize = new Size(805, 508);
             Name = "FormStatistics";
             Text = "Статистика";
-            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chartQandP).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private Button button1;
-        private Button button2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartQandP;
+        private Button buttonQ;
+        private Button buttonPrice;
         private TextBox textBoxMin;
         private TextBox textBoxMax;
         private Label label1;

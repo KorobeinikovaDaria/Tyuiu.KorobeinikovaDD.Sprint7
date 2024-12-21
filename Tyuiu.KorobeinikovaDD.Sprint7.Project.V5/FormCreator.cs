@@ -11,7 +11,7 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
         {
             InitializeComponent();
             InitializeDataTable();
-            dataGridView1.DataSource = dataTable;
+            dataGridViewData.DataSource = dataTable;
         }
         private DataTable dataTable;
 
@@ -35,14 +35,13 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
         {
             try
             {
-                // Инициализируем dataTable, если он еще не был инициализирован
                 if (dataTable == null)
                 {
                     InitializeDataTable();
                 }
                 else
                 {
-                    dataTable.Clear(); // Очищаем существующие данные
+                    dataTable.Clear(); 
                 }
 
                 var lines = File.ReadAllLines(filePath);
@@ -56,9 +55,7 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                         dataTable.Rows.Add(values);
                     }
                 }
-
-                // Привязываем dataTable к DataGridView
-                dataGridView1.DataSource = dataTable;
+                dataGridViewData.DataSource = dataTable;
             }
             catch (Exception ex)
             {
@@ -91,7 +88,6 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                 }
             }
 
-            // Добавляем последнее значение
             result.Add(sb.ToString().Trim());
 
             return result.ToArray();
@@ -128,16 +124,17 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0 && dataTable != null)
+            if (dataGridViewData.SelectedRows.Count > 0 && dataTable != null)
             {
-                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                DataGridViewRow selectedRow = dataGridViewData.SelectedRows[0];
 
                 selectedRow.Cells["Код товара"].Value = txtProductCode.Text;
                 selectedRow.Cells["Название"].Value = txtProductName.Text;
                 selectedRow.Cells["Количество штук на складе"].Value = txtQuantity.Text;
                 selectedRow.Cells["Цена за единицу"].Value = txtPrice.Text;
                 selectedRow.Cells["Описание товара"].Value = txtDescription.Text;
-                // Также обновляем данные в dataTable
+
+
                 DataRow rowToUpdate = dataTable.Rows[selectedRow.Index];
                 rowToUpdate["Код товара"] = txtProductCode.Text;
                 rowToUpdate["Название"] = txtProductName.Text;
@@ -154,12 +151,12 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
         {
             try
             {
-                if (dataGridView1.SelectedRows.Count > 0 && dataTable != null)
+                if (dataGridViewData.SelectedRows.Count > 0 && dataTable != null)
                 {
-                    int index = dataGridView1.SelectedRows[0].Index;
+                    int index = dataGridViewData.SelectedRows[0].Index;
 
                     dataTable.Rows.RemoveAt(index);
-                    dataGridView1.Rows.RemoveAt(index);
+                    dataGridViewData.Rows.RemoveAt(index);
 
                     ClearTextBoxes();
                 }
@@ -233,9 +230,9 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
         }
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count > 0)
+            if (dataGridViewData.SelectedRows.Count > 0)
             {
-                DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+                DataGridViewRow selectedRow = dataGridViewData.SelectedRows[0];
                 txtProductCode.Text = selectedRow.Cells["Код товара"].Value.ToString();
                 txtProductName.Text = selectedRow.Cells["Название"].Value.ToString();
                 txtQuantity.Text = selectedRow.Cells["Количество штук на складе"].Value.ToString();
@@ -260,6 +257,18 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
             FormStatistics formStats = new FormStatistics();
             formStats.SetData(dataTable);
             formStats.Show();
+        }
+
+        private void buttonOpenAboutForm_Click(object sender, EventArgs e)
+        {
+            FormAbout formabout = new FormAbout();
+            formabout.Show();
+        }
+
+        private void buttonOpenInfoForm_Click(object sender, EventArgs e)
+        {
+            FormInfo formInfo = new FormInfo();
+            formInfo.Show();
         }
         private void txtProductCode_TextChanged(object sender, EventArgs e)
         {

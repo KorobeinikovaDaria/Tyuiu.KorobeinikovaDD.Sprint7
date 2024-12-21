@@ -39,7 +39,7 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
         {
             try
             {
-                chart1.Series.Clear();
+                chartQandP.Series.Clear();
                 int seriesCount = 0;
 
                 Debug.WriteLine("Data in DataTable:");
@@ -64,25 +64,25 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                         double xValue = seriesCount + 1;
                         newSeries.Points.AddXY(xValue, quantity);
 
-                        chart1.Series.Add(newSeries);
+                        chartQandP.Series.Add(newSeries);
                         seriesCount++;
                     }
                 }
 
-                foreach (var series in chart1.Series)
+                foreach (var series in chartQandP.Series)
                 {
                     series["PointWidth"] = "0.8";
                 }
 
 
-                chart1.ChartAreas[0].AxisX.Minimum = 0.5;
-                chart1.ChartAreas[0].AxisX.Maximum = seriesCount + 0.5;
-                chart1.ChartAreas[0].AxisX.IsStartedFromZero = false;
-                chart1.ChartAreas[0].AxisX.Interval = 1;
+                chartQandP.ChartAreas[0].AxisX.Minimum = 0.5;
+                chartQandP.ChartAreas[0].AxisX.Maximum = seriesCount + 0.5;
+                chartQandP.ChartAreas[0].AxisX.IsStartedFromZero = false;
+                chartQandP.ChartAreas[0].AxisX.Interval = 1;
 
-                chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+                chartQandP.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
 
-                chart1.Refresh();
+                chartQandP.Refresh();
             }
             catch (Exception ex)
             {
@@ -118,6 +118,11 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
             {
                 MessageBox.Show($"Произошла ошибка: {ex.Message}");
             }
+            finally
+            {
+                textBoxMin.Enabled = true;
+                textBoxMax.Enabled = true;
+            }
         }
 
 
@@ -135,7 +140,7 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
         {
             try
             {
-                chart1.Series.Clear();
+                chartQandP.Series.Clear();
                 int seriesCount = 0;
 
                 Debug.WriteLine("Data in DataTable:");
@@ -160,29 +165,28 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                         double xValue = seriesCount + 1;
                         newSeries.Points.AddXY(xValue, price);
 
-                        chart1.Series.Add(newSeries);
+                        chartQandP.Series.Add(newSeries);
                         seriesCount++;
                     }
                 }
 
-                foreach (var series in chart1.Series)
+                foreach (var series in chartQandP.Series)
                 {
                     series["PointWidth"] = "0.8";
                 }
 
-                // Настройка оси Y для отображения значений от 0 до 100000
-                chart1.ChartAreas[0].AxisY.Minimum = 0;
-                chart1.ChartAreas[0].AxisY.Maximum = 100000;
-                chart1.ChartAreas[0].AxisY.Interval = 10000;
+                chartQandP.ChartAreas[0].AxisY.Minimum = 0;
+                chartQandP.ChartAreas[0].AxisY.Maximum = 100000;
+                chartQandP.ChartAreas[0].AxisY.Interval = 10000;
 
-                chart1.ChartAreas[0].AxisX.Minimum = 0.5;
-                chart1.ChartAreas[0].AxisX.Maximum = seriesCount + 0.5;
-                chart1.ChartAreas[0].AxisX.IsStartedFromZero = false;
-                chart1.ChartAreas[0].AxisX.Interval = 1;
+                chartQandP.ChartAreas[0].AxisX.Minimum = 0.5;
+                chartQandP.ChartAreas[0].AxisX.Maximum = seriesCount + 0.5;
+                chartQandP.ChartAreas[0].AxisX.IsStartedFromZero = false;
+                chartQandP.ChartAreas[0].AxisX.Interval = 1;
 
-                chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+                chartQandP.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
 
-                chart1.Refresh();
+                chartQandP.Refresh();
             }
             catch (Exception ex)
             {

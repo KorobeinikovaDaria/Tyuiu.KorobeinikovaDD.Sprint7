@@ -30,48 +30,48 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSearch));
-            groupBox1 = new GroupBox();
-            button1 = new Button();
+            groupBoxSearch = new GroupBox();
+            buttonSearch = new Button();
             textBoxSearch = new TextBox();
-            dataGridView2 = new DataGridView();
+            dataGridViewSearch = new DataGridView();
             panel1 = new Panel();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
+            buttonPA = new Button();
+            buttonPD = new Button();
+            buttonQA = new Button();
+            buttonQD = new Button();
             panelQ = new Panel();
             panel3 = new Panel();
             toolTipInfo = new ToolTip(components);
-            groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            groupBoxSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSearch).BeginInit();
             panel1.SuspendLayout();
             panelQ.SuspendLayout();
             panel3.SuspendLayout();
             SuspendLayout();
             // 
-            // groupBox1
+            // groupBoxSearch
             // 
-            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(textBoxSearch);
-            groupBox1.Location = new Point(12, 7);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(776, 75);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Поиск";
+            groupBoxSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxSearch.Controls.Add(buttonSearch);
+            groupBoxSearch.Controls.Add(textBoxSearch);
+            groupBoxSearch.Location = new Point(12, 7);
+            groupBoxSearch.Name = "groupBoxSearch";
+            groupBoxSearch.Size = new Size(776, 75);
+            groupBoxSearch.TabIndex = 0;
+            groupBoxSearch.TabStop = false;
+            groupBoxSearch.Text = "Поиск";
             // 
-            // button1
+            // buttonSearch
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(698, 20);
-            button1.Name = "button1";
-            button1.Size = new Size(62, 44);
-            button1.TabIndex = 1;
-            toolTipInfo.SetToolTip(button1, "Нажмите на кнопку, чтобы найти нужный товар");
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += buttonSearch_Click;
+            buttonSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonSearch.Image = (Image)resources.GetObject("buttonSearch.Image");
+            buttonSearch.Location = new Point(698, 20);
+            buttonSearch.Name = "buttonSearch";
+            buttonSearch.Size = new Size(62, 44);
+            buttonSearch.TabIndex = 1;
+            toolTipInfo.SetToolTip(buttonSearch, "Нажмите на кнопку, чтобы найти нужный товар");
+            buttonSearch.UseVisualStyleBackColor = true;
+            buttonSearch.Click += buttonSearch_Click;
             // 
             // textBoxSearch
             // 
@@ -83,73 +83,73 @@
             textBoxSearch.TabIndex = 0;
             toolTipInfo.SetToolTip(textBoxSearch, "Введите в строку поиска код или название товара");
             // 
-            // dataGridView2
+            // dataGridViewSearch
             // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Dock = DockStyle.Fill;
-            dataGridView2.Location = new Point(0, 0);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.Size = new Size(776, 305);
-            dataGridView2.TabIndex = 1;
+            dataGridViewSearch.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewSearch.Dock = DockStyle.Fill;
+            dataGridViewSearch.Location = new Point(0, 0);
+            dataGridViewSearch.Name = "dataGridViewSearch";
+            dataGridViewSearch.RowHeadersWidth = 51;
+            dataGridViewSearch.Size = new Size(776, 305);
+            dataGridViewSearch.TabIndex = 1;
             // 
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Controls.Add(dataGridView2);
+            panel1.Controls.Add(dataGridViewSearch);
             panel1.Location = new Point(12, 88);
             panel1.Name = "panel1";
             panel1.Size = new Size(776, 305);
             panel1.TabIndex = 2;
             // 
-            // button2
+            // buttonPA
             // 
-            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(14, 7);
-            button2.Name = "button2";
-            button2.Size = new Size(94, 29);
-            button2.TabIndex = 3;
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += buttonSortAscendingPrice_Click;
+            buttonPA.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonPA.Image = (Image)resources.GetObject("buttonPA.Image");
+            buttonPA.Location = new Point(14, 7);
+            buttonPA.Name = "buttonPA";
+            buttonPA.Size = new Size(94, 29);
+            buttonPA.TabIndex = 3;
+            buttonPA.UseVisualStyleBackColor = true;
+            buttonPA.Click += buttonSortAscendingPrice_Click;
             // 
-            // button3
+            // buttonPD
             // 
-            button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button3.Image = (Image)resources.GetObject("button3.Image");
-            button3.Location = new Point(14, 42);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 4;
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += buttonSortDescendingPrice_Click;
+            buttonPD.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonPD.Image = (Image)resources.GetObject("buttonPD.Image");
+            buttonPD.Location = new Point(14, 42);
+            buttonPD.Name = "buttonPD";
+            buttonPD.Size = new Size(94, 29);
+            buttonPD.TabIndex = 4;
+            buttonPD.UseVisualStyleBackColor = true;
+            buttonPD.Click += buttonSortDescendingPrice_Click;
             // 
-            // button4
+            // buttonQA
             // 
-            button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button4.Image = (Image)resources.GetObject("button4.Image");
-            button4.Location = new Point(13, 7);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 29);
-            button4.TabIndex = 5;
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += buttonSortAscendingE_Click;
+            buttonQA.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonQA.Image = (Image)resources.GetObject("buttonQA.Image");
+            buttonQA.Location = new Point(13, 7);
+            buttonQA.Name = "buttonQA";
+            buttonQA.Size = new Size(94, 29);
+            buttonQA.TabIndex = 5;
+            buttonQA.UseVisualStyleBackColor = true;
+            buttonQA.Click += buttonSortAscendingE_Click;
             // 
-            // button5
+            // buttonQD
             // 
-            button5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button5.Image = (Image)resources.GetObject("button5.Image");
-            button5.Location = new Point(13, 42);
-            button5.Name = "button5";
-            button5.Size = new Size(94, 29);
-            button5.TabIndex = 6;
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += buttonSortDescendingE_Click;
+            buttonQD.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonQD.Image = (Image)resources.GetObject("buttonQD.Image");
+            buttonQD.Location = new Point(13, 42);
+            buttonQD.Name = "buttonQD";
+            buttonQD.Size = new Size(94, 29);
+            buttonQD.TabIndex = 6;
+            buttonQD.UseVisualStyleBackColor = true;
+            buttonQD.Click += buttonSortDescendingE_Click;
             // 
             // panelQ
             // 
-            panelQ.Controls.Add(button4);
-            panelQ.Controls.Add(button5);
+            panelQ.Controls.Add(buttonQA);
+            panelQ.Controls.Add(buttonQD);
             panelQ.Location = new Point(12, 399);
             panelQ.Name = "panelQ";
             panelQ.Size = new Size(122, 74);
@@ -158,8 +158,8 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(button2);
-            panel3.Controls.Add(button3);
+            panel3.Controls.Add(buttonPA);
+            panel3.Controls.Add(buttonPD);
             panel3.Location = new Point(140, 399);
             panel3.Name = "panel3";
             panel3.Size = new Size(124, 74);
@@ -179,13 +179,13 @@
             Controls.Add(panel3);
             Controls.Add(panelQ);
             Controls.Add(panel1);
-            Controls.Add(groupBox1);
+            Controls.Add(groupBoxSearch);
             MinimumSize = new Size(821, 523);
             Name = "FormSearch";
             Text = "Поиск";
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            groupBoxSearch.ResumeLayout(false);
+            groupBoxSearch.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSearch).EndInit();
             panel1.ResumeLayout(false);
             panelQ.ResumeLayout(false);
             panel3.ResumeLayout(false);
@@ -194,15 +194,15 @@
 
         #endregion
 
-        private GroupBox groupBox1;
-        private Button button1;
+        private GroupBox groupBoxSearch;
+        private Button buttonSearch;
         private TextBox textBoxSearch;
-        private DataGridView dataGridView2;
+        private DataGridView dataGridViewSearch;
         private Panel panel1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
+        private Button buttonPA;
+        private Button buttonPD;
+        private Button buttonQA;
+        private Button buttonQD;
         private Panel panelQ;
         private ToolTip toolTipInfo;
         private Panel panel3;

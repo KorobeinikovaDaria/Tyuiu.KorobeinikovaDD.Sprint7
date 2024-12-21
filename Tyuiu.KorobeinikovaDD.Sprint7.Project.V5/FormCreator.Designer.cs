@@ -35,7 +35,7 @@
             buttonCreate = new Button();
             buttonSave = new Button();
             button4 = new Button();
-            dataGridView1 = new DataGridView();
+            dataGridViewData = new DataGridView();
             groupBox1 = new GroupBox();
             txtProductCode = new TextBox();
             groupBox2 = new GroupBox();
@@ -61,7 +61,7 @@
             buttonInfo = new Button();
             toolTipInfo = new ToolTip(components);
             label2 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewData).BeginInit();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             panel5.SuspendLayout();
@@ -127,20 +127,20 @@
             button4.UseVisualStyleBackColor = true;
             button4.Click += btnDelete_Click;
             // 
-            // dataGridView1
+            // dataGridViewData
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 23);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(591, 378);
-            dataGridView1.TabIndex = 4;
+            dataGridViewData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewData.Dock = DockStyle.Fill;
+            dataGridViewData.Location = new Point(3, 23);
+            dataGridViewData.Name = "dataGridViewData";
+            dataGridViewData.RowHeadersWidth = 51;
+            dataGridViewData.Size = new Size(591, 378);
+            dataGridViewData.TabIndex = 4;
             // 
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            groupBox1.Controls.Add(dataGridView1);
+            groupBox1.Controls.Add(dataGridViewData);
             groupBox1.Location = new Point(12, 76);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(597, 404);
@@ -334,6 +334,7 @@
             buttonHelp.TabIndex = 11;
             toolTipInfo.SetToolTip(buttonHelp, "Руководство пользователя");
             buttonHelp.UseVisualStyleBackColor = true;
+            buttonHelp.Click += buttonOpenAboutForm_Click;
             // 
             // buttonInfo
             // 
@@ -345,6 +346,7 @@
             buttonInfo.TabIndex = 12;
             toolTipInfo.SetToolTip(buttonInfo, "Информация о программе");
             buttonInfo.UseVisualStyleBackColor = true;
+            buttonInfo.Click += buttonOpenInfoForm_Click;
             // 
             // toolTipInfo
             // 
@@ -371,7 +373,7 @@
             MinimumSize = new Size(1039, 542);
             Name = "FormCreator";
             Text = "Оптовая база";
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewData).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             panel5.ResumeLayout(false);
@@ -393,7 +395,7 @@
         private Button buttonCreate;
         private Button buttonSave;
         private Button button4;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewData;
         private GroupBox groupBox1;
         private TextBox txtProductCode;
         private GroupBox groupBox2;

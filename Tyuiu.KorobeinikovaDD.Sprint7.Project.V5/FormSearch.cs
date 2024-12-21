@@ -23,13 +23,13 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
 
         private void InitializeDataGridView()
         {
-            dataGridView2.AutoGenerateColumns = true;
+            dataGridViewSearch.AutoGenerateColumns = true;
         }
 
         public void SetData(DataTable data)
         {
             dataTable = data;
-            dataGridView2.DataSource = data;
+            dataGridViewSearch.DataSource = data;
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
@@ -47,12 +47,12 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                 {
                     // Копируем отфильтрованные строки в новый DataTable
                     DataTable resultTable = filteredRows.CopyToDataTable();
-                    dataGridView2.DataSource = resultTable; // Устанавливаем результат в DataGridView
+                    dataGridViewSearch.DataSource = resultTable; // Устанавливаем результат в DataGridView
                 }
                 else
                 {
                     // Если нет результатов, очищаем DataGridView или показываем сообщение
-                    dataGridView2.DataSource = null; // или dataGridView2.Rows.Clear();
+                    dataGridViewSearch.DataSource = null; // или dataGridView2.Rows.Clear();
                     MessageBox.Show("Нет результатов для поиска.");
                 }
             }
@@ -64,8 +64,8 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
             try
             {
                 DataTable sortedTable = dataServiceSort.SortColumnAscending(dataTable, "Количество штук на складе");
-                dataGridView2.DataSource = sortedTable; 
-                dataGridView2.Refresh(); 
+                dataGridViewSearch.DataSource = sortedTable; 
+                dataGridViewSearch.Refresh(); 
             }
             catch (ArgumentException ex)
             {
@@ -78,8 +78,8 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
             try
             {
                 DataTable sortedTable = dataServiceSort.SortColumnDescending(dataTable, "Количество штук на складе");
-                dataGridView2.DataSource = sortedTable;
-                dataGridView2.Refresh();
+                dataGridViewSearch.DataSource = sortedTable;
+                dataGridViewSearch.Refresh();
             }
             catch (ArgumentException ex)
             {
@@ -93,8 +93,8 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                 try
                 {
                     DataTable sortedTable = dataServiceSort.SortColumnAscending(dataTable, "Цена за единицу");
-                    dataGridView2.DataSource = sortedTable; 
-                    dataGridView2.Refresh(); 
+                    dataGridViewSearch.DataSource = sortedTable; 
+                    dataGridViewSearch.Refresh(); 
                 }
                 catch (ArgumentException ex)
                 {
@@ -106,8 +106,8 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                 try
                 {
                     DataTable sortedTable = dataServiceSort.SortColumnDescending(dataTable, "Цена за единицу");
-                    dataGridView2.DataSource = sortedTable;
-                    dataGridView2.Refresh();
+                    dataGridViewSearch.DataSource = sortedTable;
+                    dataGridViewSearch.Refresh();
                 }
                 catch (ArgumentException ex)
                 {
