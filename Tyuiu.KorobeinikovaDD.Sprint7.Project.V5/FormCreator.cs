@@ -105,6 +105,23 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtProductCode.Text) ||
+                string.IsNullOrWhiteSpace(txtProductName.Text) ||
+                string.IsNullOrWhiteSpace(txtQuantity.Text) ||
+                string.IsNullOrWhiteSpace(txtPrice.Text) ||
+                string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                MessageBox.Show("Введите все данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Проверка на числовые значения для количества и цены
+            if (!int.TryParse(txtQuantity.Text, out _) || !decimal.TryParse(txtPrice.Text, out _))
+            {
+                MessageBox.Show("Введите числовое значение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (dataTable != null)
             {
                 DataRow newRow = dataTable.NewRow();
@@ -124,6 +141,22 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(txtProductCode.Text) ||
+                string.IsNullOrWhiteSpace(txtProductName.Text) ||
+                string.IsNullOrWhiteSpace(txtQuantity.Text) ||
+                string.IsNullOrWhiteSpace(txtPrice.Text) ||
+                string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                MessageBox.Show("Пожалуйста, введите все данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!int.TryParse(txtQuantity.Text, out _) || !decimal.TryParse(txtPrice.Text, out _))
+            {
+                MessageBox.Show("Пожалуйста, введите числовое значение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (dataGridViewData.SelectedRows.Count > 0 && dataTable != null)
             {
                 DataGridViewRow selectedRow = dataGridViewData.SelectedRows[0];
@@ -133,7 +166,6 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                 selectedRow.Cells["Количество штук на складе"].Value = txtQuantity.Text;
                 selectedRow.Cells["Цена за единицу"].Value = txtPrice.Text;
                 selectedRow.Cells["Описание товара"].Value = txtDescription.Text;
-
 
                 DataRow rowToUpdate = dataTable.Rows[selectedRow.Index];
                 rowToUpdate["Код товара"] = txtProductCode.Text;
@@ -149,8 +181,6 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            try
-            {
                 if (dataGridViewData.SelectedRows.Count > 0 && dataTable != null)
                 {
                     int index = dataGridViewData.SelectedRows[0].Index;
@@ -164,20 +194,14 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                 {
                     MessageBox.Show("Пожалуйста, выберите строку для удаления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Произошла ошибка при удалении строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
+           
                 buttonSave.Enabled = true;
-            }
+            
         }
 
         private void buttonSaveFile_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.FileName = "Оптовая база.csv";
+            saveFileDialog1.FileName = "OutputData.csv";
             saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -216,7 +240,7 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                     }
                 }
 
-                MessageBox.Show($"CSV файл '{path}' успешно сохранен.");
+                MessageBox.Show($"Файл '{path}' успешно сохранен!");
             }
         }
 

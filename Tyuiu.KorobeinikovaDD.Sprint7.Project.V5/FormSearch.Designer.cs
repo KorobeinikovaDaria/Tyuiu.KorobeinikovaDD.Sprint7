@@ -148,6 +148,7 @@
             // 
             // panelQ
             // 
+            panelQ.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             panelQ.Controls.Add(buttonQA);
             panelQ.Controls.Add(buttonQD);
             panelQ.Location = new Point(12, 399);
@@ -155,9 +156,11 @@
             panelQ.Size = new Size(122, 74);
             panelQ.TabIndex = 7;
             toolTipInfo.SetToolTip(panelQ, "Cортировка по количеству штук на складе\r\n(Первая кнопка сортирует сверху-вниз, вторая - снизу-вверх)\r\n");
+            panelQ.Paint += panelQ_Paint;
             // 
             // panel3
             // 
+            panel3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             panel3.Controls.Add(buttonPA);
             panel3.Controls.Add(buttonPD);
             panel3.Location = new Point(140, 399);

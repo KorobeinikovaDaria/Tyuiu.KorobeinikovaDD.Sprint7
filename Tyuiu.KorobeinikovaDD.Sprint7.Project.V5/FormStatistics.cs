@@ -48,6 +48,19 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                     Debug.WriteLine($"Название: {row["Название"]}, Количество: {row["Количество штук на складе"]}");
                 }
 
+                int maxQuantity = 0;
+                foreach (DataRow row in data.Rows)
+                {
+                    string quantityStr = row["Количество штук на складе"]?.ToString()?.Trim();
+                    if (int.TryParse(quantityStr, out int quantity))
+                    {
+                        if (quantity > maxQuantity)
+                        {
+                            maxQuantity = quantity;
+                        }
+                    }
+                }
+
                 foreach (DataRow row in data.Rows)
                 {
                     string name = row["Название"]?.ToString()?.Trim();
@@ -74,6 +87,9 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                     series["PointWidth"] = "0.8";
                 }
 
+                chartQandP.ChartAreas[0].AxisY.Minimum = 0;
+                chartQandP.ChartAreas[0].AxisY.Maximum = maxQuantity + 100;
+                chartQandP.ChartAreas[0].AxisY.Interval = 100;
 
                 chartQandP.ChartAreas[0].AxisX.Minimum = 0.5;
                 chartQandP.ChartAreas[0].AxisX.Maximum = seriesCount + 0.5;
@@ -149,6 +165,18 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                     Debug.WriteLine($"Название: {row["Название"]}, Цена: {row["Цена за единицу"]}");
                 }
 
+                int maxQuantity = 0;
+                foreach (DataRow row in data.Rows)
+                {
+                    string quantityStr = row["Цена за единицу"]?.ToString()?.Trim();
+                    if (int.TryParse(quantityStr, out int quantity))
+                    {
+                        if (quantity > maxQuantity)
+                        {
+                            maxQuantity = quantity;
+                        }
+                    }
+                }
                 foreach (DataRow row in data.Rows)
                 {
                     string name = row["Название"]?.ToString()?.Trim();
@@ -176,8 +204,8 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                 }
 
                 chartQandP.ChartAreas[0].AxisY.Minimum = 0;
-                chartQandP.ChartAreas[0].AxisY.Maximum = 100000;
-                chartQandP.ChartAreas[0].AxisY.Interval = 10000;
+                chartQandP.ChartAreas[0].AxisY.Maximum = maxQuantity + 5000;
+                chartQandP.ChartAreas[0].AxisY.Interval = 5000;
 
                 chartQandP.ChartAreas[0].AxisX.Minimum = 0.5;
                 chartQandP.ChartAreas[0].AxisX.Maximum = seriesCount + 0.5;

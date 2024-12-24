@@ -35,24 +35,27 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             string searchValue = textBoxSearch.Text.Trim();
-            if (!string.IsNullOrEmpty(searchValue) && dataTable != null)
+
+            if (dataTable != null)
             {
-                // Фильтруем строки по критериям поиска
+                if (string.IsNullOrEmpty(searchValue))
+                {
+                    dataGridViewSearch.DataSource = dataTable;
+                    return;
+                }
+
                 var filteredRows = dataTable.AsEnumerable()
                     .Where(row => row.Field<string>("Код товара").IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0 ||
                                   row.Field<string>("Название").IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0);
 
-                // Проверяем, есть ли отфильтрованные строки перед копированием в DataTable
                 if (filteredRows.Any())
                 {
-                    // Копируем отфильтрованные строки в новый DataTable
                     DataTable resultTable = filteredRows.CopyToDataTable();
-                    dataGridViewSearch.DataSource = resultTable; // Устанавливаем результат в DataGridView
+                    dataGridViewSearch.DataSource = resultTable;
                 }
                 else
                 {
-                    // Если нет результатов, очищаем DataGridView или показываем сообщение
-                    dataGridViewSearch.DataSource = null; // или dataGridView2.Rows.Clear();
+                    dataGridViewSearch.DataSource = null;
                     MessageBox.Show("Нет результатов для поиска.");
                 }
             }
@@ -64,8 +67,8 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
             try
             {
                 DataTable sortedTable = dataServiceSort.SortColumnAscending(dataTable, "Количество штук на складе");
-                dataGridViewSearch.DataSource = sortedTable; 
-                dataGridViewSearch.Refresh(); 
+                dataGridViewSearch.DataSource = sortedTable;
+                dataGridViewSearch.Refresh();
             }
             catch (ArgumentException ex)
             {
@@ -88,36 +91,39 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
         }
 
         private void buttonSortAscendingPrice_Click(object sender, EventArgs e)
-        
-            {
-                try
-                {
-                    DataTable sortedTable = dataServiceSort.SortColumnAscending(dataTable, "Цена за единицу");
-                    dataGridViewSearch.DataSource = sortedTable; 
-                    dataGridViewSearch.Refresh(); 
-                }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-            private void buttonSortDescendingPrice_Click(object sender, EventArgs e)
-            {
-                try
-                {
-                    DataTable sortedTable = dataServiceSort.SortColumnDescending(dataTable, "Цена за единицу");
-                    dataGridViewSearch.DataSource = sortedTable;
-                    dataGridViewSearch.Refresh();
-                }
-                catch (ArgumentException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
 
+        {
+            try
+            {
+                DataTable sortedTable = dataServiceSort.SortColumnAscending(dataTable, "Цена за единицу");
+                dataGridViewSearch.DataSource = sortedTable;
+                dataGridViewSearch.Refresh();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void buttonSortDescendingPrice_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataTable sortedTable = dataServiceSort.SortColumnDescending(dataTable, "Цена за единицу");
+                dataGridViewSearch.DataSource = sortedTable;
+                dataGridViewSearch.Refresh();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void panelQ_Paint(object sender, PaintEventArgs e)
+        {
 
         }
-    } 
+    }
+} 
     
 
   
