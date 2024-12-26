@@ -114,8 +114,6 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
                 MessageBox.Show("Введите все данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            // Проверка на числовые значения для количества и цены
             if (!int.TryParse(txtQuantity.Text, out _) || !decimal.TryParse(txtPrice.Text, out _))
             {
                 MessageBox.Show("Введите числовое значение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -141,42 +139,47 @@ namespace Tyuiu.KorobeinikovaDD.Sprint7.Project.V5
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtProductCode.Text) ||
+                if (string.IsNullOrWhiteSpace(txtProductCode.Text) ||
                 string.IsNullOrWhiteSpace(txtProductName.Text) ||
                 string.IsNullOrWhiteSpace(txtQuantity.Text) ||
                 string.IsNullOrWhiteSpace(txtPrice.Text) ||
                 string.IsNullOrWhiteSpace(txtDescription.Text))
-            {
-                MessageBox.Show("Пожалуйста, введите все данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                {
+                    MessageBox.Show("Пожалуйста, введите все данные", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            if (!int.TryParse(txtQuantity.Text, out _) || !decimal.TryParse(txtPrice.Text, out _))
-            {
-                MessageBox.Show("Пожалуйста, введите числовое значение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                if (!int.TryParse(txtQuantity.Text, out _) || !decimal.TryParse(txtPrice.Text, out _))
+                {
+                    MessageBox.Show("Пожалуйста, введите числовое значение", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
-            if (dataGridViewData.SelectedRows.Count > 0 && dataTable != null)
-            {
-                DataGridViewRow selectedRow = dataGridViewData.SelectedRows[0];
+                if (dataGridViewData.SelectedRows.Count > 0 && dataTable != null)
+                {
+                    DataGridViewRow selectedRow = dataGridViewData.SelectedRows[0];
 
-                selectedRow.Cells["Код товара"].Value = txtProductCode.Text;
-                selectedRow.Cells["Название"].Value = txtProductName.Text;
-                selectedRow.Cells["Количество штук на складе"].Value = txtQuantity.Text;
-                selectedRow.Cells["Цена за единицу"].Value = txtPrice.Text;
-                selectedRow.Cells["Описание товара"].Value = txtDescription.Text;
+                    selectedRow.Cells["Код товара"].Value = txtProductCode.Text;
+                    selectedRow.Cells["Название"].Value = txtProductName.Text;
+                    selectedRow.Cells["Количество штук на складе"].Value = txtQuantity.Text;
+                    selectedRow.Cells["Цена за единицу"].Value = txtPrice.Text;
+                    selectedRow.Cells["Описание товара"].Value = txtDescription.Text;
 
-                DataRow rowToUpdate = dataTable.Rows[selectedRow.Index];
-                rowToUpdate["Код товара"] = txtProductCode.Text;
-                rowToUpdate["Название"] = txtProductName.Text;
-                rowToUpdate["Количество штук на складе"] = txtQuantity.Text;
-                rowToUpdate["Цена за единицу"] = txtPrice.Text;
-                rowToUpdate["Описание товара"] = txtDescription.Text;
+                    DataRow rowToUpdate = dataTable.Rows[selectedRow.Index];
+                    rowToUpdate["Код товара"] = txtProductCode.Text;
+                    rowToUpdate["Название"] = txtProductName.Text;
+                    rowToUpdate["Количество штук на складе"] = txtQuantity.Text;
+                    rowToUpdate["Цена за единицу"] = txtPrice.Text;
+                    rowToUpdate["Описание товара"] = txtDescription.Text;
 
-                ClearTextBoxes();
-            }
+                    ClearTextBoxes();
+                }
+                 else
+                {
+                MessageBox.Show("Пожалуйста, выберите строку для редактирования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                 }
             buttonSave.Enabled = true;
+          
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
